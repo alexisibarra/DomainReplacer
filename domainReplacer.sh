@@ -15,18 +15,26 @@ replacementString=''
 
 echo "Looking in $directory"
 
+
+replaceInFiles () {
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 
-find $directory \
- -type f \
- -name "*.xml" \
- -not -path $gitDirectory'/*' \
- -print0 \
- | while IFS= read -r -d $'\0' file; 
-    do
-        echo "Analizing $file"
-        perl -i -pe 's/www.movistar.com.ve//;' $file
-    done
+    extension=$1
+    regex=$2
+    find $directory \
+    -type f \
+    -name "*.$extension" \
+    -not -path $gitDirectory'/*' \
+    -print0 \
+    | while IFS= read -r -d $'\0' file; 
+        do
+            echo "Analizing $file"
+            perl -i -pe $regex $file
+        done
 
-IFS=$SAVEIFS
+    IFS=$SAVEIFS
+}
+
+replaceInFiles "html" 's/href="www.movistar.com.ve//;'
+replaceInFiles "asp" 's/href="www.movistar.com.ve//;'
