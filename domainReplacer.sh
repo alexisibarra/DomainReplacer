@@ -26,6 +26,7 @@ IFS=$(echo -en "\n\b")
     -type f \
     -name "*.$extension" \
     -not -path $gitDirectory'/*' \
+    -not -name '*.(pdf|jpg|jpeg|png|gif|psd)' \
     -print0 \
     | while IFS= read -r -d $'\0' file; 
         do
