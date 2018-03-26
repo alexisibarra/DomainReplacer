@@ -16,8 +16,8 @@ replacementString=''
 echo "Looking in $directory"
 
 replaceInFiles () {
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
 
     extension=$1
     regex=$2
