@@ -15,7 +15,6 @@ replacementString=''
 
 echo "Looking in $directory"
 
-
 replaceInFiles () {
 SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
