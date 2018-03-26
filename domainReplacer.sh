@@ -21,6 +21,7 @@ replaceInFiles () {
 
     extension=$1
     regex=$2
+    
     find $directory \
     -type f \
     -name "*.$extension" \
