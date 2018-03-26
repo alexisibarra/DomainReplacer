@@ -8,7 +8,7 @@ else
     directory=$1
 fi
 
-git='/git'
+git='/.git'
 gitDirectory=$directory$git
 stringToReplace='http:\/\/www.movistar\.com\.ve'
 replacementString=''
