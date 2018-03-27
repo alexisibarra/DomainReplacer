@@ -26,7 +26,7 @@ replaceInFiles () {
     -type f \
     -name "*.$extension" \
     -not -path $gitDirectory'/*' \
-    -not -name '*.[html|asp|jpg|JPG|png|PNG|pdf|old]*' \
+    -not -name '*.[jpg|JPG|png|PNG|pdf|old]*' \
     -not -name '*.[zZ][iI][pP]*' \
     -not -name '*.[bB][mM][pP]*' \
     -not -name '*.[tT][iI][fF]*' \
@@ -34,11 +34,8 @@ replaceInFiles () {
     -not -name '*.[wW][oO][fF][fF]*' \
     -not -name '*.[sS][vV][gG]*' \
     -not -name '*.[eE][oO][tT]*' \
-    -not -name '*.css*' \
-    -not -name '*.js*' \
     -not -name '*.doc*' \
     -not -name '*.php*' \
-    -not -name '*.xml*' \
     -not -name '*.xlsx*' \
     -not -name '*.xls*' \
     -not -name '*.ppt*' \
@@ -51,7 +48,6 @@ replaceInFiles () {
     -not -name '*.pkg*' \
     -not -name '*.dmg*' \
     -not -name '*.mp4*' \
-    -not -name '*.txt*' \
     -not -name '*.shs*' \
     -not -name '*.fla*' \
     -not -name '*.jar*' \
@@ -64,9 +60,7 @@ replaceInFiles () {
     -not -name '*.pxr*' \
     -not -name '*.wmv*' \
     -not -name '*.cod*' \
-    -not -name '*.gitignore*' \
     -not -name '*.gitattributes*' \
-    -not -name '*.as*' \
     -not -name '*.cgi*' \
     -not -name '*.py*' \
     -not -name '*.pl*' \
@@ -78,20 +72,23 @@ replaceInFiles () {
     -not -name '*.flv*' \
     -not -name '*.XLS*' \
     -not -name '*.cfc*' \
-    -not -name '*.config*' \
-    -not -name '*.yml*' \
-    -not -name '*.config*' \
     -not -name '*.sys*' \
-    -not -name '*.bak*' \
     -print0 \
     | while IFS= read -r -d $'\0' file; 
         do
             echo "Analizing $file"
-            perl -i -pe $regex $file
+            perl -i -pe 's/href="www.movistar.com.ve/href="/;' $file
+            perl -i -pe 's/href="http:\/\/www.movistar.com.ve/href="/;' $file
+            perl -i -pe 's/src="www.movistar.com.ve/src="/;' $file
+            perl -i -pe 's/src="http:\/\/www.movistar.com.ve/src="/;' $file
+            perl -i -pe 's/([^.])movistar.com.ve/$1.movistarve.com/;' $file
+            perl -i -pe 's/movistar.com.ve/movistarve.com/;' $file
+            # perl -i -pe $regex $file            
         done
 
     IFS=$SAVEIFS
 }
 
-replaceInFiles "html" 's/href="www.movistar.com.ve//;'
-replaceInFiles "asp" 's/href="www.movistar.com.ve//;'
+replaceInFiles "*" 's/href="www.movistar.com.ve/href="/;'
+replaceInFiles "*" 's/href="http:\/\/www.movistar.com.ve/href="/;'
+replaceInFiles "*" 's/www.movistar.com.ve/www.movistarve.com/;'
