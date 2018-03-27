@@ -20,7 +20,6 @@ replaceInFiles () {
     IFS=$(echo -en "\n\b")
 
     extension=$1
-    regex=$2
     
     find $directory \
     -type f \
@@ -77,18 +76,12 @@ replaceInFiles () {
     | while IFS= read -r -d $'\0' file; 
         do
             echo "Analizing $file"
-            perl -i -pe 's/href="www.movistar.com.ve/href="/;' $file
-            perl -i -pe 's/href="http:\/\/www.movistar.com.ve/href="/;' $file
-            perl -i -pe 's/src="www.movistar.com.ve/src="/;' $file
-            perl -i -pe 's/src="http:\/\/www.movistar.com.ve/src="/;' $file
-            perl -i -pe 's/([^.])movistar.com.ve/$1.movistarve.com/;' $file
-            perl -i -pe 's/movistar.com.ve/movistarve.com/;' $file
-            # perl -i -pe $regex $file            
+            perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve"/href="\/"/;' $file
+            perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve/href="/;' $file
+            perl -i -pe 's/([^.]*.)movistar.com.ve/$1movistarve.com/;' $file
         done
 
     IFS=$SAVEIFS
 }
 
-replaceInFiles "*" 's/href="www.movistar.com.ve/href="/;'
-replaceInFiles "*" 's/href="http:\/\/www.movistar.com.ve/href="/;'
-replaceInFiles "*" 's/www.movistar.com.ve/www.movistarve.com/;'
+replaceInFiles "*"
