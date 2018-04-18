@@ -79,6 +79,7 @@ replaceInFiles () {
             perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve"/href="\/"/;' $file
             perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve/href="/;' $file
             perl -i -pe 's/www.movistar.com.ve/www.movistarve.com/;' $file            
+            perl -i -pe 's/www.mi.movistar.com.ve/www.mi.movistarve.com/;' $file            
             # perl -i -pe 's/([^.]*.)movistar.com.ve/$1movistarve.com/;' $file
         done
 
