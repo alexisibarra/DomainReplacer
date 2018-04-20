@@ -76,10 +76,10 @@ replaceInFiles () {
     | while IFS= read -r -d $'\0' file; 
         do
             echo "Analizing $file"
-            perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve"/href="\/"/;' $file
-            perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve/href="/;' $file
-            perl -i -pe 's/www.movistar.com.ve/www.movistarve.com/;' $file            
-            perl -i -pe 's/mi.movistar.com.ve/mi.movistarve.com/;' $file            
+            perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve"/href="\/"/g;' $file
+            perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve/href="/g;' $file
+            perl -i -pe 's/www.movistar.com.ve/www.movistarve.com/g;' $file            
+            perl -i -pe 's/mi.movistar.com.ve/mi.movistarve.com/g;' $file            
             # perl -i -pe 's/([^.]*.)movistar.com.ve/$1movistarve.com/;' $file
         done
 
