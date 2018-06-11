@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -z ${1+x} ]; 
-then 
+if [ -z ${1+x} ];
+then
     echo "Please, type the directory you want to look up"
     read directory
-else 
+else
     directory=$1
 fi
 
@@ -20,7 +20,7 @@ replaceInFiles () {
     IFS=$(echo -en "\n\b")
 
     extension=$1
-    
+
     find $directory \
     -type f \
     -name "*.$extension" \
@@ -73,13 +73,15 @@ replaceInFiles () {
     -not -name '*.cfc*' \
     -not -name '*.sys*' \
     -print0 \
-    | while IFS= read -r -d $'\0' file; 
+    | while IFS= read -r -d $'\0' file;
         do
             echo "Analizing $file"
             perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve"/href="\/"/g;' $file
             perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve/href="/g;' $file
-            perl -i -pe 's/www.movistar.com.ve/www.movistarve.com/g;' $file            
-            perl -i -pe 's/mi.movistar.com.ve/mi.movistarve.com/g;' $file            
+            perl -i -pe 's/href="(http:\/\/|)movistar.com.ve/href="/g;' $file
+            perl -i -pe 's/src="(http:\/\/|)movistar.com.ve/src="/g;' $file
+            perl -i -pe 's/www.movistar.com.ve/www.movistarve.com/g;' $file
+            perl -i -pe 's/mi.movistar.com.ve/mi.movistarve.com/g;' $file
             # perl -i -pe 's/([^.]*.)movistar.com.ve/$1movistarve.com/;' $file
         done
 
