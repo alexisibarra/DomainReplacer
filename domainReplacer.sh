@@ -25,7 +25,9 @@ replaceInFiles () {
     -type f \
     -name "*.$extension" \
     -not -path $gitDirectory'/*' \
-    -not -name '*.[jpg|JPG|png|PNG|pdf|old]*' \
+    -not -name '*.[jJ][pP][gG]*' \
+    -not -name '*.[pP][nN][gG]*' \
+    -not -name '*.[pP][dD][fF]*' \
     -not -name '*.[zZ][iI][pP]*' \
     -not -name '*.[bB][mM][pP]*' \
     -not -name '*.[tT][iI][fF]*' \
@@ -80,6 +82,7 @@ replaceInFiles () {
             perl -i -pe 's/href="(http:\/\/|)www.movistar.com.ve/href="/g;' $file
             perl -i -pe 's/href="(http:\/\/|)movistar.com.ve/href="/g;' $file
             perl -i -pe 's/src="(http:\/\/|)movistar.com.ve/src="/g;' $file
+            perl -i -pe 's/http:\/\/www.movistar.com.ve/http:\/\/www.movistarve.com/g;' $file
             perl -i -pe 's/www.movistar.com.ve/www.movistarve.com/g;' $file
             perl -i -pe 's/mi.movistar.com.ve/mi.movistarve.com/g;' $file
             # perl -i -pe 's/([^.]*.)movistar.com.ve/$1movistarve.com/;' $file
